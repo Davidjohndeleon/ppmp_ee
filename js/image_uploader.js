@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".upload-btn").forEach(button => {
+    let uploadButtons = document.querySelectorAll("button[data-bs-target='#modal-image-uploader']");
+    
+    uploadButtons.forEach(button => {
         button.addEventListener("click", function () {
-            let itemID = this.getAttribute("data-item-id");
-            document.querySelector("input[name='itemID']").value = itemID;
+            let itemContainer = this.closest(".tiles-div");
+
+            let itemID = itemContainer.querySelector(".item-id").innerText;
+
+            document.getElementById("modal-itemID").value = itemID;
         });
     });
 });
