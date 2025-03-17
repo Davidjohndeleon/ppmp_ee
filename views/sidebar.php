@@ -66,11 +66,6 @@
                     <i class="fa-solid fa-box"></i>
                     <span>IMISS PPMP</span>
                 </div>
-
-                <div class="side-bar-routes" id="imiss-uploader-sub-div">
-                    <i class="fa-solid fa-box"></i>
-                    <span>IMAGE UPLOADER</span>
-                </div>
             <?php } ?>
 
         </div>

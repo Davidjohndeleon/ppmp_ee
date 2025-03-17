@@ -31,8 +31,8 @@ $(document).ready(function(){
         window.location.href = "../views/imiss_ppmp.php";
     });
 
-    $('#imiss-uploader-sub-div').click(function(){
-        window.location.href = "../views/image_uploader.php";
+    $('#imiss-inventory-sub-div').click(function(){
+        window.location.href = "../views/imiss_inventory.php";
     });
 
     $('#logout-btn').click(function(){

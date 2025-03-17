@@ -18,7 +18,7 @@
                 $stmt->bindParam(":id", $itemID, PDO::PARAM_INT);
     
                 if ($stmt->execute()) {
-                    header("Location: image_uploader.php");
+                    header("Location: imiss_inventory.php");
                     exit();
                 }
             } catch (PDOException $e) {
@@ -34,12 +34,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/image_uploader.css">
+    <link rel="stylesheet" href="../css/item_crud.css">
     <?php require "../links/header_link.php" ?>
 </head>
 <body>
     <?php 
-        $view = "imiss-uploader-sub-div";
+        $view = "imiss-inventory-sub-div";
         include("./sidebar.php")
     ?>
     
@@ -49,6 +49,10 @@
             <div class="search-bar">
                 <input type="text" id="search-input"/>
                 <button id="search-btn">Search</button>
+            </div>
+
+            <div class="add-item-function">
+                <button id="add-item">Add Item</button>
             </div>
         </div>
 
@@ -64,32 +68,12 @@
                     <p class="item-description"><?php echo $item_data[$i]['itemName'] ?> <span style="display:none" class="item-id"><?php echo $item_data[$i]['itemID'] ?></span></p>
                     <span class="item-price">P 80,000.00</span>
                     
-                    <div>
-                        <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="cart-icon" data-bs-toggle="modal" data-bs-target="#modal-image-uploader">Upload image</button>
+                    <div id="update-delete-button">
+                        <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="update-function" data-bs-toggle="modal">Update</button>
+                        <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="delete-function" data-bs-toggle="modal">Delete</button>
                     </div>
                 </div>
             <?php } ?>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modal-image-uploader" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered custom-modal-width modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">IMAGE UPLOADER</h5>
-                </div>
-                <form method="POST" id="modal-body-incoming" class="modal-body-incoming ml-2" enctype="multipart/form-data">
-                    <input type="hidden" name="itemID" id="modal-itemID" value="">
-
-                    <label for="itemImage">Image</label>
-                    <input type="file" name="itemImage" id="itemImage" accept="image/*" required>
-
-                    <div class="modal-footer">
-                        <button id="close-modal-btn-incoming" type="button" type="button" data-bs-dismiss="modal">CLOSE</button>
-                        <button id="imageupload-btn" type="submit">Upload</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 
@@ -98,6 +82,6 @@
         var section = "<?php echo $section ?>";
     </script>
     <script src="../js/home_traverse.js?v=<?php echo time(); ?>"></script>
-    <script src="../js/image_uploader.js?v=<?php echo time(); ?>"></script>
+    <script src="../js/imiss_inventory.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
