@@ -52,7 +52,7 @@
             </div>
 
             <div class="add-item-function">
-                <button id="add-item">Add Item</button>
+                <button id="add-item" data-bs-toggle="modal" data-bs-target="#modal-add-item">Add Item</button>
             </div>
         </div>
 
@@ -76,6 +76,23 @@
             <?php } ?>
         </div>
     </div>
+    <div class="modal fade" id="modal-add-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered custom-modal-width modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Add Item</h5>
+                </div>
+                <div id="modal-body-incoming" class="modal-body-incoming ml-2">
+                    <h1>dito sasalpak</h1>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-modal-btn-incoming" type="button" type="button" data-bs-dismiss="modal">CLOSE</button>
+                    <button id="placeorder-btn" type="button">ADD ITEM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <?php require "../links/script_links.php" ?>
     <script> 
