@@ -70,7 +70,7 @@
                     
                     <div id="update-delete-button">
                         <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="update-function" data-bs-toggle="modal" data-bs-target="#modal-update-item">Update</button>
-                        <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="delete-function" data-bs-toggle="modal" data-bs-target="#modal-update-item">Delete</button>
+                        <button data-itemid="<?php echo $item_data[$i]['itemID']; ?>" id="delete-function" data-bs-toggle="modal" data-bs-target="#modal-delete-item">Delete</button>
                     </div>
                 </div>
             <?php } ?>
@@ -96,14 +96,36 @@
         <div class="modal-dialog modal-dialog-centered custom-modal-width modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Add Item</h5>
+                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Update Item</h5>
                 </div>
+
                 <div id="modal-body-incoming" class="modal-body-incoming ml-2">
-                    <h1>dito sasalpak</h1>
+                <form method="POST" id="modal-body-add-item" class="modal-body-add-item ml-2" enctype="multipart/form-data">
+
+                 <div>  
+                <label for="itemName">Item Name</label><br>
+                <input type="text" name="itemName" id="itemName" required>
+                </div> 
+
+                <DIV>
+                <label for="itemPrice">Item Price</label><br>
+                <input type="text" name="itemPrice" id="itemPrice" required>
+                </DIV>
+
+                <div>
+                <label for="itemDescription">Description</label><br>
+                <input type="text" name="itemDescription" id="itemDescription" required>
                 </div>
+
+                <div>
+                <label for="itemImage">Image</label><br>
+                <input type="file" name="itemImage" id="itemImage" accept="image/*" required>
+                </div>
+
                 <div class="modal-footer">
                     <button id="close-modal-btn-incoming" type="button" type="button" data-bs-dismiss="modal">CLOSE</button>
                     <button id="placeorder-btn" type="button">ADD ITEM</button>
+                </div>
                 </div>
             </div>
         </div>
