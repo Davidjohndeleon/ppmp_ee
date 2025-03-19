@@ -212,8 +212,6 @@ body .right-container .function-bar .search-bar input{
     outline: none;
 }
 
-
-
 body .right-container .function-bar .search-bar button{
     width: 7%;
     height: 100%;
@@ -310,7 +308,7 @@ body .right-container .inventory-div .tiles-div .function-div{
     border-bottom-right-radius: 5px;
 }
 
-#add-item {
+.add-item{
     background: #FF5722;
     padding: 8px 6px 8px 6px;
     border: none;
@@ -319,11 +317,11 @@ body .right-container .inventory-div .tiles-div .function-div{
     border-radius: 6px;
 }
 
-#update-delete-button button {
+.update-delete-button button {
     margin-bottom: 8px;
 }
 
-#update-function {
+.update-function {
     background: #227aff;
     padding: 6px;
     border: none;
@@ -332,7 +330,7 @@ body .right-container .inventory-div .tiles-div .function-div{
     border-radius: 6px;
 }
 
-#delete-function {
+.delete-function {
     background: #f80000;
     padding: 6px;
     border: none;
@@ -400,8 +398,9 @@ body .right-container .inventory-div .tiles-div .function-div{
     width:100px;
 }
 
-
-
+.item_name, .item_price, .item_description, .item_image{
+    margin-top: 6px;
+}
 
 #modal-update-item .modal-content{
     width:50%;
@@ -462,62 +461,6 @@ body .right-container .inventory-div .tiles-div .function-div{
     width:100px;
 }
 
-
-#modal-delete-item .modal-content{
-    width:50%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
-
-#modal-delete-item .modal-content .modal-header,
-#modal-notif .modal-content .modal-header{
-    width: 100%;
-    height: 50px;
-    background: #D84315;
-}
-
-#modal-delete-item .modal-content .modal-header h5,
-#modal-notif .modal-content .modal-header h5{
-    color:white;
-    font-weight: 600;
-}
-
-#modal-delete-item .modal-content #modal-body-incoming{
-    width: 95%;
-    height: auto;
-    margin-top:15px;
-}
-
-#modal-delete-item .modal-content #modal-body-incoming #cart-table{
-    width: 100% !important;
-}
-
-#modal-delete-item .modal-content .modal-footer{
-    width: 100%;
-    height: 50px;
-    /* background: #D84315; */
-    /* display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center; */
-    padding:0;
-}
-
-#modal-delete-item .modal-content .modal-footer button{
-    background: #FF5722;
-    border:none;
-    border-radius: 5px;
-    color:white;
-    width:150px;
-    height: 30px;
-    margin-right:20px;
-    font-weight: 600;
-}
-
-#modal-delete-item .modal-content .modal-footer button:nth-child(1){
-    background: #B51E1A;
-    width:100px;
+#modal-update-item .modal-dialog .modal-content .modal-body-incoming .modal-body-update-item input{
+    max-width: 100%;
 }
