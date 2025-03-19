@@ -41,15 +41,23 @@ date_default_timezone_set('Asia/Manila');
     }
 
     // Update
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $itemID = $_POST['itemID'];
-        $itemName = $_POST['itemName'];
-        $itemPrice = $_POST['itemPrice'];
-        $itemDescription = $_POST['itemDescription'];
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //     $itemID = $_POST['itemID'];
+    //     $itemName = $_POST['itemName'];
+    //     $itemPrice = $_POST['itemPrice'];
+    //     $itemDescription = $_POST['itemDescription'];
         
-        header("Location: ../views/imiss_inventory.php");
-        exit();
-    }
+        
+    //     $sql = "UPDATE imiss_inventory SET itemName=?, itemPrice=?, itemDescription=? WHERE itemID=?";
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->execute([$itemName, $itemPrice, $itemDescription, $itemID]);
+        
+
+    //     // success
+    //     header("Location: ../views/imiss_inventory.php");
+    //     exit();
+    // }
+
 
     // Delete
     if (isset($_GET['id']) && !empty($_GET['id'])) {

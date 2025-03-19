@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Update script
+let clicked_itemID, clicked_itemName, clicked_itemPrice, clicked_itemDescription;
+
 document.querySelectorAll('.update-function').forEach(button => {
     button.addEventListener('click', function() {
         const itemID = this.getAttribute('data-itemid');
@@ -22,11 +23,39 @@ document.querySelectorAll('.update-function').forEach(button => {
         document.getElementById('update-item-price').value = itemPrice;
         document.getElementById('update-item-description').value = itemDescription;
 
+        clicked_itemID = itemID
+        clicked_itemName = itemName
+        clicked_itemPrice = itemPrice
+        clicked_itemDescription = itemDescription
+
+        
+
         // Show the image preview
-        const imgPreview = document.getElementById('item-image-preview');
-        imgPreview.src = `data:image/jpeg;base64,${itemImageBase64}`;
+        // const imgPreview = document.getElementById('item-image-preview');
+        // imgPreview.src = `data:image/jpeg;base64,${itemImageBase64}`;
     });
 });
+
+document.getElementById('update-btn-modal').addEventListener('click' , () =>{
+    let data = {
+        itemIDKey : clicked_itemID,
+        itemNameKey : clicked_itemName,
+        itemPriceKey : clicked_itemPrice,
+        itemDescriptionKey : clicked_itemDescription
+    }
+
+    console.log(data)
+
+    $.ajax({
+        url: '../php/update_itemInventory.php',
+        method: "POST",
+        data : data,
+        dataType : 'json',
+        success: function(response) {
+            console.log(response)
+        }
+    });
+})
 
 // Delete script
 document.addEventListener("DOMContentLoaded", function() {

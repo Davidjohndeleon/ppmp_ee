@@ -58,7 +58,7 @@
                     <p class="item-description">
                         <?php echo $item['itemName']; ?>
                     </p>
-                    <span class="item-price">₱ <?php echo number_format($item['itemPrice'], 2); ?></span>
+                    <span class="item-price">₱ <?php echo number_format($item['itemPrice']); ?></span>
                     <div class="update-delete-button">
                         <button 
                             class="update-function" 
@@ -84,22 +84,22 @@
                             </div>
 
                             <div id="modal-body-incoming" class="modal-body-incoming">
-                                <form action="../php/item_crud.php" method="POST" id="modal-body-update-item" class="modal-body-update-item" enctype="multipart/form-data">
-                                    <input type="hidden" name="itemID" id="update-item-id">
+                                <!-- <form action="../php/item_crud.php" method="POST" id="modal-body-update-item" class="modal-body-update-item" enctype="multipart/form-data"> -->
+                                    <input type="hidden" name="update-item-id" id="update-item-id">
 
                                     <div>
                                         <label for="update-item-name">Item Name</label><br>
-                                        <input type="text" name="item_name" id="update-item-name" required>
+                                        <input type="text" name="update-item-name" id="update-item-name" required>
                                     </div>
 
                                     <div>
                                         <label for="update-item-price">Item Price</label><br>
-                                        <input type="text" name="item_price" id="update-item-price" required>
+                                        <input type="text" name="update-item-price" id="update-item-price" required>
                                     </div>
 
                                     <div>
                                         <label for="update-item-description">Item Description</label><br>
-                                        <input type="text" name="item_description" id="update-item-description" required>
+                                        <input type="text" name="update-item-description"" id="update-item-description" required>
                                     </div>
 
                                     <div>
@@ -110,9 +110,9 @@
 
                                     <div class="modal-footer">
                                         <button id="close-modal-btn-incoming" type="button" type="button" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit">Update</button>
+                                        <button type="submit" id="update-btn-modal">Update</button>
                                     </div>
-                                </form>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
