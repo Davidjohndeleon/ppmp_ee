@@ -1,32 +1,34 @@
 let itemID, itemName, itemPrice, itemDescription, itemImage;
 
-document.getElementById('add-item-btn').addEventListener('click' , () =>{
+document.getElementById('add-item-btn').addEventListener('click', () => {
     
-    itemName = document.getElementById('itemName').value,
-    itemPrice = document.getElementById('itemPrice').value,
-    itemDescription = document.getElementById('itemDescription').value,
-    itemImage = document.getElementById('itemImage').value
+    itemName = document.getElementById('itemName').value;
+    itemPrice = document.getElementById('itemPrice').value;
+    itemDescription = document.getElementById('itemDescription').value;
+    itemImage = document.getElementById('itemImage').files[0];
+    
+    // Create FormData object to properly handle file uploads
+    let formData = new FormData();
+    formData.append('itemName', itemName);
+    formData.append('itemPrice', itemPrice);
+    formData.append('itemDescription', itemDescription);
+    formData.append('itemImage', itemImage);
 
-    let data = {
-        itemName: itemName,
-        itemPrice: itemPrice,
-        itemDescription: itemDescription,
-        itemImage: itemImage,
-    }
-
-    console.log(data)
+    console.log(formData);
 
     $.ajax({
         url: '../php/create.php',
         method: "POST",
-        data : data,
-        dataType : 'json',
+        data: formData,
+        processData: false,  // Don't process the data
+        contentType: false,  // Don't set content type (browser will set it with boundary)
+        dataType: 'json',
         success: function(response) {
-            console.log(response)
+            console.log(response);
             window.location.href = '../views/imiss_inventory.php';
         }
     });
-})
+});
 
 document.querySelectorAll('.update-function').forEach(button => {
     button.addEventListener('click', () => {
