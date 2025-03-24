@@ -1,32 +1,41 @@
-let itemID, itemName, itemPrice, itemDescription, itemImage;
+let itemID, itemName, itemPrice, itemDescription;
 
-document.getElementById('add-item-btn').addEventListener('click' , () =>{
+document.getElementById('add-item-btn').addEventListener('click', () => {
     
-    itemName = document.getElementById('itemName').value,
-    itemPrice = document.getElementById('itemPrice').value,
-    itemDescription = document.getElementById('itemDescription').value,
-    itemImage = document.getElementById('itemImage').value
-
-    let data = {
-        itemName: itemName,
-        itemPrice: itemPrice,
-        itemDescription: itemDescription,
-        itemImage: itemImage,
+    itemName = document.getElementById('itemName').value;
+    itemPrice = document.getElementById('itemPrice').value;
+    itemDescription = document.getElementById('itemDescription').value;
+    
+    // Create FormData object to properly handle file uploads
+    let formData = new FormData();
+    formData.append('itemName', itemName);
+    formData.append('itemPrice', itemPrice);
+    formData.append('itemDescription', itemDescription);
+    
+    // Get the file input element and append the file to FormData
+    let imageInput = document.getElementById('itemImage');
+    if (imageInput.files.length > 0) {
+        formData.append('itemImage', imageInput.files[0]);
     }
 
-    console.log(data)
+    console.log('Sending form data...');
 
     $.ajax({
         url: '../php/create.php',
         method: "POST",
-        data : data,
-        dataType : 'json',
+        data: formData,
+        processData: false,  // Don't process the data
+        contentType: false,  // Don't set content type (browser will set it with boundary)
+        dataType: 'json',
         success: function(response) {
-            console.log(response)
+            console.log(response);
             window.location.href = '../views/imiss_inventory.php';
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
         }
     });
-})
+});
 
 document.querySelectorAll('.update-function').forEach(button => {
     button.addEventListener('click', () => {
