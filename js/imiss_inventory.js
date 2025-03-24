@@ -81,16 +81,26 @@ document.getElementById('update-item-btn').addEventListener('click' , () =>{
     });
 })
 
-// document.getElementById('confirmDeleteBtn').addEventListener('click' , () =>{
+document.querySelectorAll('.delete-function').forEach(button => {
+    button.addEventListener('click', () => {
+        itemID = button.getAttribute('data-itemid');
+        console.log('Selected Item ID:', itemID);
+    });
+});
 
-//     $.ajax({
-//         url: '../php/delete.php',
-//         method: "POST",
-//         data : {itemID : itemID},
-//         dataType : 'json',
-//         success: function(response) {
-//             console.log(response)
-//             window.location.href = '../views/imiss_inventory.php';
-//         }
-//     });
-// })
+document.getElementById('delete-item-btn').addEventListener('click' , () =>{
+
+    let data = {
+        itemID : itemID
+    }
+    $.ajax({
+        url: '../php/delete.php',
+        method: "POST",
+        data : data,
+        dataType : 'json',
+        success: function(response) {
+            console.log(response)
+            window.location.href = '../views/imiss_inventory.php';
+        }
+    });
+})
