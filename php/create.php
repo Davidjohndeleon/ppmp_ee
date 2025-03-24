@@ -11,7 +11,8 @@
         if (isset($_FILES['itemImage'])) {
             $itemImage = file_get_contents($_FILES['itemImage']['tmp_name']);
         } else {
-            $itemImage = null;
+            $defaultImagePath = '../source/inventory_image/item_1.png';
+            $itemImage = file_get_contents($defaultImagePath);
         }
 
         $sql = "INSERT INTO imiss_inventory (itemName, itemPrice, itemDescription, itemImage) VALUES (?, ?, ?, ?)";

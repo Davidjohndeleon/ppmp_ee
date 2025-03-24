@@ -95,12 +95,12 @@
 
                         <div class="item_description">
                             <label for="itemDescription">Item Description</label><br>
-                            <input type="text" id="itemDescription" name="itemDescription" >
+                            <input type="text" id="itemDescription" name="itemDescription">
                         </div>
 
                         <div class="item_image">
                             <label for="itemImage">Item Image</label><br>
-                            <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
+                            <input type="file" id="itemImage" name="itemImage" accept="image/*">
                         </div>
 
                         <div class="modal-footer">
@@ -137,7 +137,7 @@
 
                         <div class="item_description">
                             <label for="itemDescription">Item Description</label><br>
-                            <input type="text" id="update-itemDescription" name="itemDescription" required>
+                            <input type="text" id="update-itemDescription" name="itemDescription">
                         </div>
 
                         <div class="item_image">
