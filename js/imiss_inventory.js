@@ -1,24 +1,20 @@
-let itemID, itemName, itemPrice, itemDescription;
+let itemID, itemName, itemPrice, itemDescription, itemImage;
 
 document.getElementById('add-item-btn').addEventListener('click', () => {
     
     itemName = document.getElementById('itemName').value;
     itemPrice = document.getElementById('itemPrice').value;
     itemDescription = document.getElementById('itemDescription').value;
+    itemImage = document.getElementById('itemImage').files[0];
     
     // Create FormData object to properly handle file uploads
     let formData = new FormData();
     formData.append('itemName', itemName);
     formData.append('itemPrice', itemPrice);
     formData.append('itemDescription', itemDescription);
-    
-    // Get the file input element and append the file to FormData
-    let imageInput = document.getElementById('itemImage');
-    if (imageInput.files.length > 0) {
-        formData.append('itemImage', imageInput.files[0]);
-    }
+    formData.append('itemImage', itemImage);
 
-    console.log('Sending form data...');
+    console.log(formData);
 
     $.ajax({
         url: '../php/create.php',
@@ -30,9 +26,6 @@ document.getElementById('add-item-btn').addEventListener('click', () => {
         success: function(response) {
             console.log(response);
             window.location.href = '../views/imiss_inventory.php';
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
         }
     });
 });
