@@ -53,7 +53,8 @@
                 <div class="tiles-div" id="tile-div-<?php echo $item['itemID']; ?>">
                     <img class="item-image" src="data:image/jpeg;base64,<?php echo base64_encode($item['itemImage']); ?>" alt="item-image">
                     <p class="item-description">
-                        <?php echo $item['itemName']; ?>
+                    <?php echo htmlspecialchars(strlen($item['itemName']) > 80 ? substr($item['itemName'], 0, 80) . '...' : $item['itemName']); ?>
+
                     </p>
                     <span class="item-price">₱ <?php echo $item['itemPrice']; ?></span>
                     <div class="update-delete-button">
@@ -94,7 +95,7 @@
 
                         <div class="item_description">
                             <label for="itemDescription">Item Description</label><br>
-                            <input type="text" id="itemDescription" name="itemDescription" required>
+                            <input type="text" id="itemDescription" name="itemDescription" >
                         </div>
 
                         <div class="item_image">
@@ -103,7 +104,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button id="close-modal-btn-incoming" type="button" data-bs-dismiss="modal">CLOSE</button>
+                            <button id="close-modal-btn-incoming" type="button" data-bs-dismiss="modal">Close</button>
                             <button id="add-item-btn">Add</button>
                         </div>
                     </form>
@@ -146,7 +147,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button id="close-modal-btn-incoming" type="button" data-bs-dismiss="modal">CLOSE</button>
+                            <button id="close-modal-btn-incoming" type="button" data-bs-dismiss="modal">Close</button>
                             <button id="update-item-btn">Update</button>
                         </div>
                     </form>
@@ -167,7 +168,7 @@
                     Are you sure you want to delete this item?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" data-bs-dismiss="modal">Cancel</button>
                     <button id="delete-item-btn">Delete</button>
                 </div>
             </div>

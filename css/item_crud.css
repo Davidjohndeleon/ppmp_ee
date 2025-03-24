@@ -255,6 +255,18 @@ body .right-container .inventory-div .tiles-div{
     position:relative;
 }
 
+.update-delete-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px; /* Align buttons to the right */
+}
+
+.update-delete-button button {
+    margin: 4px; /* Remove any margin */
+    border-radius: 4px; /* Remove border-radius if necessary */
+}
+
 body .right-container .inventory-div .tiles-div img{
     width:90%;
     height: 150px;
@@ -396,10 +408,20 @@ body .right-container .inventory-div .tiles-div .function-div{
 #modal-add-item .modal-content .modal-footer button:nth-child(1){
     background: #B51E1A;
     width:100px;
-}
+} 
 
 .item_name, .item_price, .item_description, .item_image{
     margin-top: 6px;
+}
+
+#addItem-form input,
+#addItem-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
 }
 
 #modal-update-item .modal-content{
@@ -463,4 +485,30 @@ body .right-container .inventory-div .tiles-div .function-div{
 
 #modal-update-item .modal-dialog .modal-content .modal-body-incoming .modal-body-update-item input{
     max-width: 100%;
+}
+
+#updateItem-form input,
+#updateItem-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+}
+
+#modal-delete-item .modal-content .modal-footer button{
+    background: #FF5722;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    width:100px;
+    height: 30px;
+    margin-right:20px;
+    font-weight: 600;
+}
+
+#modal-delete-item .modal-content .modal-footer button:nth-child(1){
+    background: #B51E1A;
+    width:100px;
 }
