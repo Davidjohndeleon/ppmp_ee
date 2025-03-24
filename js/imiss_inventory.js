@@ -30,6 +30,7 @@ document.getElementById('add-item-btn').addEventListener('click', () => {
     });
 });
 
+
 document.querySelectorAll('.update-function').forEach(button => {
     button.addEventListener('click', () => {
         // Get data
@@ -44,35 +45,86 @@ document.querySelectorAll('.update-function').forEach(button => {
         document.getElementById('update-itemName').value = itemName;
         document.getElementById('update-itemPrice').value = itemPrice;
         document.getElementById('update-itemDescription').value = itemDescription;
-
+        
         //image preview
-        const imgPreview = document.getElementById('update-item-image-preview');
+        const imgPreview = document.getElementById('updateitem-image-preview');
         if (imgPreview) {
             imgPreview.src = itemImage;
         }
     });
 });
 
+// document.getElementById('update-item-btn').addEventListener('click' , () =>{
+
+//     itemName = document.getElementById('update-itemName').value;
+//     itemPrice = document.getElementById('update-itemPrice').value;
+//     itemDescription = document.getElementById('update-itemDescription').value;
+//     itemImage = document.getElementById('update-itemImage').value;
+//     itemID = document.getElementById('update-itemID').value;
+
+//     let data = {
+//         itemName: itemName,
+//         itemPrice: itemPrice,
+//         itemDescription: itemDescription,
+//         itemImage: itemImage,
+//         itemID: itemID
+//     }
+
+//     console.log(data)
+
+//     $.ajax({
+//         url: '../php/update.php',
+//         method: "POST",
+//         data : data,
+//         dataType : 'json',
+//         success: function(response) {
+//             console.log(response)
+//             window.location.href = '../views/imiss_inventory.php';
+//         }
+//     });
+// })
+
+// Submit Update Form with AJAX
 document.getElementById('update-item-btn').addEventListener('click' , () =>{
 
-    itemName = document.getElementById('update-itemName').value;
-    itemPrice = document.getElementById('update-itemPrice').value;
-    itemDescription = document.getElementById('update-itemDescription').value;
-    itemImage = document.getElementById('update-itemImage').value;
-    itemID = document.getElementById('update-itemID').value;
-
-    let data = {
-        itemName: itemName,
-        itemPrice: itemPrice,
-        itemDescription: itemDescription,
-        itemImage: itemImage,
-        itemID: itemID
-    }
-
-    console.log(data)
+    // Create FormData to send files
+    let formData = new FormData(document.getElementById("updateItem-form"));
 
     $.ajax({
         url: '../php/update.php',
+        method: "POST",
+        data: formData,
+        processData: false,  // Required for FormData
+        contentType: false,  // Required for FormData
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.status === "success") {
+                window.location.href = '../views/imiss_inventory.php';
+            } else {
+                alert("Error updating item: " + response.message);
+            }
+        },
+        error: function (error) {
+            console.error("AJAX Error:", error);
+        }
+    });
+});
+
+document.querySelectorAll('.delete-function').forEach(button => {
+    button.addEventListener('click', () => {
+        itemID = button.getAttribute('data-itemid');
+        console.log('Selected Item ID:', itemID);
+    });
+});
+
+document.getElementById('delete-item-btn').addEventListener('click' , () =>{
+
+    let data = {
+        itemID : itemID
+    }
+    $.ajax({
+        url: '../php/delete.php',
         method: "POST",
         data : data,
         dataType : 'json',
@@ -82,17 +134,3 @@ document.getElementById('update-item-btn').addEventListener('click' , () =>{
         }
     });
 })
-
-// document.getElementById('confirmDeleteBtn').addEventListener('click' , () =>{
-
-//     $.ajax({
-//         url: '../php/delete.php',
-//         method: "POST",
-//         data : {itemID : itemID},
-//         dataType : 'json',
-//         success: function(response) {
-//             console.log(response)
-//             window.location.href = '../views/imiss_inventory.php';
-//         }
-//     });
-// })
