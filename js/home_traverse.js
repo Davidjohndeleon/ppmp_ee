@@ -15,22 +15,6 @@ $(document).ready(function(){
         $('#user-section-span').css('font-size', '1.5em');
     }
 
-    $('#inventory-list-sub-div').click(function(){
-        window.location.href = "../views/home.php";
-    });
-
-    $('#imiss-inventory-sub-div').click(function(){
-        // window.location.href = "../views/imiss_inventory.php";
-    });
-
-    $('#incoming-order-sub-div').click(function(){
-        window.location.href = "../views/incoming_order.php";
-    });
-
-    $('#imiss-ppmp-sub-div').click(function(){
-        window.location.href = "../views/imiss_ppmp.php";
-    });
-
     $('#imiss-inventory-sub-div').click(function(){
         window.location.href = "../views/imiss_inventory.php";
     });

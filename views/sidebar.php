@@ -20,7 +20,6 @@
             }
         }
 
-
     } catch (PDOException $e) {
         die("Database error: " . $e->getMessage());
     }
@@ -41,30 +40,11 @@
         </div>
 
         <div class="side-bar-route">
-            <div class="side-bar-routes" id="inventory-list-sub-div">
-                <i class="fa-solid fa-box"></i>
-                <span>Inventory List</span>
-            </div>
-
-            <div class="side-bar-routes" id="order-management-sub-div">
-                <i class="fa-solid fa-box"></i>
-                <span>Order Management</span>
-            </div>
-
             <?php if ($permissions['admin_function'] != false) { ?>
-                <div class="side-bar-routes" id="incoming-order-sub-div">
-                    <i class="fa-solid fa-box"></i>
-                    <span>Incoming Order</span>
-                </div>
                 
                 <div class="side-bar-routes" id="imiss-inventory-sub-div">
                     <i class="fa-solid fa-box"></i>
                     <span>IMISS Inventory</span>
-                </div>
-
-                <div class="side-bar-routes" id="imiss-ppmp-sub-div">
-                    <i class="fa-solid fa-box"></i>
-                    <span>IMISS PPMP</span>
                 </div>
             <?php } ?>
 

@@ -2,14 +2,6 @@
     session_start();
     include('./assets/connection/sqlconnection.php');
     date_default_timezone_set('Asia/Manila');
-
-    // $permissions = '{"inventory_lists": false, "order_management": false, "admin_function": false}';
-
-    // $sql = "INSERT INTO permission (role, permission) VALUES ('admin' , ?)";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute([$permissions]);
-    
-    // echo '<pre>'; print_r($data); echo '</pre>';
 ?>
 
 <!DOCTYPE html>
