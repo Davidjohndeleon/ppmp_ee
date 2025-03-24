@@ -23,7 +23,7 @@
             $itemImage
         ]);
 
-        echo json_encode("Item added successfully");
+        echo json_encode(['message' => 'success']);
     }
     // data type between JS, PHP, DB == all same
     // spelling column Field, PHP === DB

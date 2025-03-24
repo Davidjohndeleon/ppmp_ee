@@ -62,7 +62,7 @@
                             data-itemname="<?php echo htmlspecialchars($item['itemName']); ?>"
                             data-itemprice="<?php echo $item['itemPrice']; ?>"
                             data-itemdescription="<?php echo htmlspecialchars($item['itemDescription']); ?>"
-                            data-itemimage="<?php echo base64_encode($item['itemImage']); ?>"
+                            data-itemimage="data:image/jpeg;base64,<?php echo base64_encode($item['itemImage']); ?>"
                             data-bs-toggle="modal" data-bs-target="#modal-update-item">
                             Update
                         </button>
@@ -141,7 +141,7 @@
 
                         <div class="item_image">
                             <label for="itemImage">Item Image</label><br>
-                            <img id="updateitem-image-preview" alt="Current Image" style="max-height: 80px; margin-top: 10px;"><br>
+                            <img id="updateitem-image-preview"  alt="Current Image" style="max-height: 80px; margin-top: 10px;"><br>
                             <input type="file" id="update-itemImage" name="itemImage" accept="image/*">
                         </div>
 
