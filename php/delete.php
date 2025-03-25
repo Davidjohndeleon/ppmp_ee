@@ -3,7 +3,6 @@
     include('../assets/connection/sqlconnection.php');
     date_default_timezone_set('Asia/Manila');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $itemID = (int) $_POST['itemID'];
         
@@ -12,5 +11,4 @@
         $stmt->execute([$itemID]);
         
         echo json_encode(['message' => 'success']);
-    }
 ?>

@@ -1,4 +1,35 @@
-+
+let clicked_index;
+let itemID, itemName, itemPrice, itemDescription, itemImage;
+
+document.getElementById('add-item-btn').addEventListener('click', () => {
+    event.preventDefault();
+    
+    itemName = document.getElementById('itemName').value;
+    itemPrice = document.getElementById('itemPrice').value;
+    itemDescription = document.getElementById('itemDescription').value;
+    itemImage = document.getElementById('itemImage').files[0];
+    
+    let formData = new FormData();
+    formData.append('itemName', itemName);
+    formData.append('itemPrice', itemPrice);
+    formData.append('itemDescription', itemDescription);
+    formData.append('itemImage', itemImage);
+
+    console.log(formData);
+
+    $.ajax({
+        url: '../php/create.php',
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            window.location.href = '../views/imiss_inventory.php';
+        }
+    });
+});
 
 document.querySelectorAll('.update-function').forEach(button => {
     button.addEventListener('click', () => {
@@ -21,10 +52,18 @@ document.querySelectorAll('.update-function').forEach(button => {
     });
 });
 
+document.querySelectorAll('.tiles-div').forEach((tileDiv, index) => {
+    // Attach the click event listener to each .tiles-div element
+    tileDiv.addEventListener('click', () => {
+        clicked_index = index;  // Log the index of the clicked element
+    });
+});
+
 document.getElementById('update-item-btn').addEventListener('click' , () =>{
+    event.preventDefault();
 
     let formData = new FormData(document.getElementById("updateItem-form"));
-
+    
     $.ajax({
         url: '../php/update.php',
         method: "POST",
@@ -34,7 +73,11 @@ document.getElementById('update-item-btn').addEventListener('click' , () =>{
         dataType: 'json',
         success: function (response) {
             console.log(response);
-            window.location.href = '../views/imiss_inventory.php';
+            document.querySelectorAll('.item-price')[clicked_index].textContent = `₱ ${response[1].itemPrice}`
+            
+            // document.querySelectorAll('.item-price')[clicked_index].textContent = response.itemID
+            //success
+            // window.location.href = '../views/imiss_inventory.php';
         }
     });
 });
@@ -48,8 +91,9 @@ document.querySelectorAll('.delete-function').forEach(button => {
 
 document.getElementById('delete-item-btn').addEventListener('click' , () =>{
 
+
     let data = {
-        itemID : itemID
+        itemID
     }
 
     $.ajax({

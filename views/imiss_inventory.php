@@ -3,19 +3,10 @@
     include('../assets/connection/sqlconnection.php');
     date_default_timezone_set('Asia/Manila');
 
-    // Retrieve any message from the session and clear it
-    $message = '';
-    if (isset($_SESSION['success_message'])) {
-        $message = $_SESSION['success_message'];
-        unset($_SESSION['success_message']);
-    } elseif (isset($_SESSION['error_message'])) {
-        $message = $_SESSION['error_message'];
-        unset($_SESSION['error_message']);
-    }
-
     $stmt = $pdo->prepare("SELECT * FROM imiss_inventory");
     $stmt->execute();
     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +44,7 @@
                 <div class="tiles-div" id="tile-div-<?php echo $item['itemID']; ?>">
                     <img class="item-image" src="data:image/jpeg;base64,<?php echo base64_encode($item['itemImage']); ?>" alt="item-image">
                     <p class="item-description">
-                    <?php echo htmlspecialchars(strlen($item['itemName']) > 80 ? substr($item['itemName'], 0, 80) . '...' : $item['itemName']); ?>
-
+                        <?php echo htmlspecialchars(strlen($item['itemName']) > 80 ? substr($item['itemName'], 0, 80) . '...' : $item['itemName']); ?>
                     </p>
                     <span class="item-price">₱ <?php echo $item['itemPrice']; ?></span>
                     <div class="update-delete-button">
@@ -174,10 +164,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        var modalMessage = <?php echo json_encode($message); ?>;
-    </script>
 
     <?php require "../links/script_links.php" ?>
     <script>

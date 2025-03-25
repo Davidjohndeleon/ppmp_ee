@@ -2,8 +2,6 @@
     session_start();
     include('../assets/connection/sqlconnection.php');
     date_default_timezone_set('Asia/Manila');
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $itemID = (int)$_POST['itemID'];
         $itemName = $_POST['itemName'];
         $itemPrice = $_POST['itemPrice'];
@@ -33,7 +31,11 @@
                 $itemID
             ]);
         }
-    
-        echo json_encode(['message' => 'success']);
-    }
+
+        //response
+        echo json_encode([
+            ['itemID' => $itemID], // 8
+            ['itemPrice' => $itemPrice],
+            ['itemDescription' => $itemDescription],
+        ])
 ?>
