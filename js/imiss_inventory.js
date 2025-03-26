@@ -73,9 +73,26 @@ document.getElementById('update-item-btn').addEventListener('click' , () =>{
         dataType: 'json',
         success: function (response) {
             console.log(response);
-            document.querySelectorAll('.item-price')[clicked_index].textContent = `₱ ${response[1].itemPrice}`
-            
+            // document.querySelectorAll('.item-price')[clicked_index].textContent = `₱ ${response[1].itemPrice}`
             // document.querySelectorAll('.item-price')[clicked_index].textContent = response.itemID
+            document.querySelectorAll('.item-price')[clicked_index].textContent = `₱ ${response.itemPrice}`;
+            document.querySelectorAll('.item-description')[clicked_index].textContent = response.itemDescription;
+            document.querySelectorAll('.item-description')[clicked_index].textContent = response.itemName.length > 80 ? response.itemName.substring(0, 80) + "..." : response.itemName;;
+            document.querySelectorAll('.item-image')[clicked_index].src = response.itemImage;
+
+            // let modal = document.getElementById("modal-update-item");
+            // bootstrap.Modal.getInstance(modal).hide();
+            
+            // hiding the modal after submitting update
+            let modal = document.getElementById("modal-update-item");
+            bootstrap.Modal.getInstance(modal)?.hide();
+
+            // Remove the modal backdrop
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+
+            // modal.addEventListener('hidden.bs.modal', () => {
+            //     bootstrap.Modal.getOrCreateInstance(modal);
+            // });
             //success
             // window.location.href = '../views/imiss_inventory.php';
         }

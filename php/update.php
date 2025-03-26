@@ -20,6 +20,7 @@
                 $imageData,
                 $itemID
             ]);
+            $itemImage = "data:image/jpeg;base64," . base64_encode($imageData);
         } else {
             $sql = "UPDATE imiss_inventory SET itemName = ?, itemPrice = ?, itemDescription = ? WHERE itemID = ?";
             
@@ -30,12 +31,21 @@
                 $itemDescription,
                 $itemID
             ]);
+            // Fetch existing image if  nno new image is uploaded
+            $sql = "SELECT itemImage FROM imiss_inventory WHERE itemID = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$itemID]);
+            $existingItem = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Checker if image exist
+            $itemImage = $existingItem ? "data:image/jpeg;base64," . base64_encode($existingItem['itemImage']) : null;
         }
 
         //response
         echo json_encode([
-            ['itemID' => $itemID], // 8
-            ['itemPrice' => $itemPrice],
-            ['itemDescription' => $itemDescription],
+            'itemID' => $itemID,
+            'itemName' => $itemName,
+            'itemPrice' => $itemPrice,
+            'itemDescription' => $itemDescription,
+            'itemImage' => $itemImage
         ])
 ?>
