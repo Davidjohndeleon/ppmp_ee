@@ -23,8 +23,15 @@
             $itemDescription,
             $itemImage
         ]);
-
-        echo json_encode(['message' => 'success']);
+        
+        $itemID = $pdo->lastInsertId();
+        echo json_encode([
+            'itemID' => $itemID,    
+            'itemName' => $itemName,
+            'itemPrice' => $itemPrice,
+            'itemDescription' => $itemDescription,
+            'itemImage' => "data:image/jpeg;base64," . base64_encode($itemImage)
+        ]);
     }
     // data type between JS, PHP, DB == all same
     // spelling column Field, PHP === DB
