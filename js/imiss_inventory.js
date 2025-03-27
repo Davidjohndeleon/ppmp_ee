@@ -26,38 +26,79 @@ document.getElementById('add-item-btn').addEventListener('click', () => {
         dataType: 'json',
         success: function(response) {
             console.log(response);
-            window.location.href = '../views/imiss_inventory.php';
+            let newTile = `
+                <div class="tiles-div" id="tile-div-${response.itemID}">
+                    <img class="item-image" src="${response.itemImage}" alt="item-image">
+                    <p class="item-description">${response.itemName.length > 80 ? response.itemName.substring(0, 80) + '...' : response.itemName}</p>
+                    <span class="item-price">₱ ${response.itemPrice}</span>
+                    <div class="update-delete-button">
+                        <button class="update-function"
+                            data-itemid="${response.itemID}"
+                            data-itemname="${response.itemName}"
+                            data-itemprice="${response.itemPrice}"
+                            data-itemdescription="${response.itemDescription}"
+                            data-itemimage="${response.itemImage}"
+                            data-bs-toggle="modal" data-bs-target="#modal-update-item">
+                            Update
+                        </button>
+                        <button class="delete-function" data-itemid="${response.itemID}" data-bs-toggle="modal" data-bs-target="#modal-delete-item">Delete</button>
+                    </div>
+                </div>
+            `;
+    
+            // append the new tile
+            document.querySelector('.inventory-div').insertAdjacentHTML('beforeend', newTile);
+        
+            // rebind the events (same as your update & delete)
+            bindUpdateDelete();
+        
+            // close modal and cleanup
+            let modal = document.getElementById("modal-add-item");
+            bootstrap.Modal.getInstance(modal)?.hide();
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+            document.getElementById('addItem-form').reset();
         }
     });
 });
 
-document.querySelectorAll('.update-function').forEach(button => {
-    button.addEventListener('click', () => {
+function bindUpdateDelete() {
+    document.querySelectorAll('.update-function').forEach(button => {
+        button.onclick = () => {
 
-        itemID = button.getAttribute('data-itemid');
-        itemName = button.getAttribute('data-itemname');
-        itemPrice = button.getAttribute('data-itemprice');
-        itemDescription = button.getAttribute('data-itemdescription');
-        itemImage = button.getAttribute('data-itemimage');
+            itemID = button.getAttribute('data-itemid');
+            itemName = button.getAttribute('data-itemname');
+            itemPrice = button.getAttribute('data-itemprice');
+            itemDescription = button.getAttribute('data-itemdescription');
+            itemImage = button.getAttribute('data-itemimage');
 
-        document.getElementById('update-itemID').value = itemID;
-        document.getElementById('update-itemName').value = itemName;
-        document.getElementById('update-itemPrice').value = itemPrice;
-        document.getElementById('update-itemDescription').value = itemDescription;
+            document.getElementById('update-itemID').value = itemID;
+            document.getElementById('update-itemName').value = itemName;
+            document.getElementById('update-itemPrice').value = itemPrice;
+            document.getElementById('update-itemDescription').value = itemDescription;
 
-        const imgPreview = document.getElementById('updateitem-image-preview');
-        if (imgPreview) {
-            imgPreview.src = itemImage;
+            const imgPreview = document.getElementById('updateitem-image-preview');
+            if (imgPreview) {
+                imgPreview.src = itemImage;
+            }
         }
     });
-});
-
-document.querySelectorAll('.tiles-div').forEach((tileDiv, index) => {
-    // Attach the click event listener to each .tiles-div element
-    tileDiv.addEventListener('click', () => {
-        clicked_index = index;  // Log the index of the clicked element
+    document.querySelectorAll('.delete-function').forEach(button => {
+        button.onclick = () => {
+            itemID = button.getAttribute('data-itemid');
+            console.log('Selected Item ID:', itemID);
+        }
     });
-});
+        
+    document.querySelectorAll('.tiles-div').forEach((tileDiv, index) => {
+        // Attach the click event listener to each .tiles-div element
+        tileDiv.onclick = () => {
+            clicked_index = index;  // Log the index of the clicked element
+        }
+    });
+}
+
+
+bindUpdateDelete();
 
 document.getElementById('update-item-btn').addEventListener('click' , () =>{
     event.preventDefault();
@@ -99,15 +140,8 @@ document.getElementById('update-item-btn').addEventListener('click' , () =>{
     });
 });
 
-document.querySelectorAll('.delete-function').forEach(button => {
-    button.addEventListener('click', () => {
-        itemID = button.getAttribute('data-itemid');
-        console.log('Selected Item ID:', itemID);
-    });
-});
-
 document.getElementById('delete-item-btn').addEventListener('click' , () =>{
-
+    event.preventDefault();
 
     let data = {
         itemID
@@ -120,7 +154,12 @@ document.getElementById('delete-item-btn').addEventListener('click' , () =>{
         dataType : 'json',
         success: function(response) {
             console.log(response)
-            window.location.href = '../views/imiss_inventory.php';
+            
+            document.getElementById('tile-div-' + itemID)?.remove();
+
+            let modal = document.getElementById("modal-delete-item");
+            bootstrap.Modal.getInstance(modal)?.hide();
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
         }
     });
-})
+});
